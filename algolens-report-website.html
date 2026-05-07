@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlgoLens — Social Media Algorithm Research</title>
+<title>Echo-chamber and green pill — Social Media Algorithm Research</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -16,9 +16,9 @@
     --teal:#00e5c3;
     --purple:#7b5fff;
     --pink:#ff4d8f;
-    --text:#e8e8f0;
-    --muted:#6b6b8a;
-    --dim:#3a3a5c;
+    --text:#f0f0fa;
+    --muted:#b0b0cc;
+    --dim:#7070a0;
   }
   html{scroll-behavior:smooth}
   body{
@@ -56,18 +56,29 @@
     color:var(--teal);text-transform:uppercase;margin-bottom:1.5rem;
     opacity:0;animation:fadeUp 0.8s ease 0.2s forwards;
   }
-  .hero-title{
-    font-family:'Syne',sans-serif;font-size:clamp(3.5rem,9vw,7.5rem);
-    font-weight:800;line-height:0.9;margin-bottom:1rem;
-    color:#ffffff;letter-spacing:-0.02em;
-    opacity:0;animation:fadeUp 0.8s ease 0.4s forwards;
-  }
+ .hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.2rem,5.8vw,4.8rem);
+  font-weight:800;
+  line-height:1;
+  margin-bottom:1rem;
+  color:#ffffff;
+  letter-spacing:-0.04em;
+
+  max-width:1200px;
+  padding:0 1rem;
+  margin-left:auto;
+  margin-right:auto;
+
+  opacity:0;
+  animation:fadeUp 0.8s ease 0.4s forwards;
+}
   .hero-title .glitch{
     display:inline-block;
     color:#ffffff;
   }
   .hero-subtitle{
-    font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:640px;
+    font-size:clamp(1rem,2vw,1.2rem);color:#c8c8e8;max-width:640px;
     margin:0 auto 0.75rem;
     opacity:0;animation:fadeUp 0.8s ease 0.6s forwards;
   }
@@ -298,13 +309,23 @@
     margin:0.75rem 0;overflow-x:auto;
   }
 
-  /* Paper cards */
   .paper-card{
     background:var(--bg3);border:0.5px solid var(--border);border-radius:10px;
     padding:1rem 1.25rem;margin-bottom:0.5rem;
+    transition:border-color 0.2s;
   }
+  .paper-card:hover{border-color:rgba(0,229,195,0.25)}
   .paper-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:0.3rem}
-  .paper-finding{font-size:12px;color:var(--muted)}
+  .paper-finding{font-size:12px;color:var(--muted);margin-bottom:0.6rem}
+  .paper-link{
+    display:inline-flex;align-items:center;gap:0.3rem;
+    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.08em;
+    color:var(--teal);text-decoration:none;
+    border:0.5px solid rgba(0,229,195,0.25);border-radius:100px;
+    padding:0.25rem 0.7rem;
+    transition:background 0.2s,border-color 0.2s;
+  }
+  .paper-link:hover{background:rgba(0,229,195,0.08);border-color:var(--teal)}
 
   /* ── FOOTER ── */
   footer{
@@ -322,6 +343,150 @@
   .modal::-webkit-scrollbar{width:4px}
   .modal::-webkit-scrollbar-track{background:transparent}
   .modal::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
+
+  /* ── Extension Hero Image ── */
+  .ext-hero-wrap{
+    margin:2.5rem auto 0;max-width:820px;
+    position:relative;
+  }
+  .ext-hero-frame{
+    border-radius:16px;overflow:hidden;
+    border:1px solid rgba(0,229,195,0.25);
+    box-shadow:0 0 60px rgba(0,229,195,0.12),0 0 120px rgba(123,95,255,0.08);
+    background:var(--card);
+    position:relative;
+  }
+  .ext-hero-frame img{
+    width:100%;display:block;border-radius:16px;
+  }
+  .ext-hero-overlay{
+    position:absolute;inset:0;border-radius:16px;
+    background:linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+    pointer-events:none;
+  }
+  .ext-hero-badge{
+    position:absolute;top:1rem;left:1rem;
+    background:rgba(0,229,195,0.15);border:1px solid rgba(0,229,195,0.4);
+    backdrop-filter:blur(8px);border-radius:100px;
+    padding:0.35rem 0.9rem;
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--teal);
+    letter-spacing:0.12em;text-transform:uppercase;
+  }
+  .ext-placeholder{
+    min-height:220px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:0.75rem;
+    color:var(--muted);font-size:14px;padding:2rem;
+    background:repeating-linear-gradient(45deg,var(--card) 0px,var(--card) 10px,var(--bg2) 10px,var(--bg2) 20px);
+    border-radius:14px;
+    border:1.5px dashed var(--border);
+    text-align:center;
+  }
+  .ext-placeholder .ph-icon{font-size:2rem;margin-bottom:0.25rem}
+  .ext-placeholder .ph-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:0.1em}
+  .ext-placeholder .ph-sub{font-size:12px;color:var(--dim)}
+
+  /* ── CTA Buttons ── */
+  .hero-ctas{
+    display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
+    margin-top:2.5rem;
+  }
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:var(--teal);color:#05050f;
+    font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+    letter-spacing:0.08em;text-transform:uppercase;
+    padding:0.8rem 1.8rem;border-radius:100px;
+    text-decoration:none;border:none;cursor:pointer;
+    transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+    box-shadow:0 0 24px rgba(0,229,195,0.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,229,195,0.5);opacity:0.92}
+  .btn-secondary{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:transparent;color:var(--text);
+    font-family:'Space Mono',monospace;font-size:12px;
+    letter-spacing:0.08em;text-transform:uppercase;
+    padding:0.8rem 1.8rem;border-radius:100px;
+    text-decoration:none;border:1px solid var(--border);cursor:pointer;
+    transition:transform 0.2s,border-color 0.2s,color 0.2s;
+  }
+  .btn-secondary:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+
+  /* ── Social / Connect Section ── */
+  .social-section{
+    padding:5rem 2rem;
+  }
+  .connect-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+    max-width:800px;margin:0 auto;
+  }
+  @media(max-width:600px){.connect-grid{grid-template-columns:1fr}}
+  .connect-card{
+    background:var(--card);border:0.5px solid var(--border);border-radius:20px;
+    padding:2rem;display:flex;flex-direction:column;align-items:center;
+    gap:1rem;text-align:center;
+    transition:border-color 0.3s,box-shadow 0.3s;
+  }
+  .connect-card:hover{border-color:rgba(0,229,195,0.3);box-shadow:0 0 30px rgba(0,229,195,0.06)}
+  .connect-card.instagram:hover{border-color:rgba(255,77,143,0.35);box-shadow:0 0 30px rgba(255,77,143,0.07)}
+  .connect-icon{
+    width:56px;height:56px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;background:var(--bg3);
+    border:0.5px solid var(--border);
+  }
+  .connect-label{
+    font-family:'Space Mono',monospace;font-size:10px;
+    color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;
+  }
+  .connect-card.instagram .connect-label{color:var(--pink)}
+  .connect-title{
+    font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);
+  }
+  .connect-sub{font-size:13px;color:var(--muted)}
+  .qr-placeholder{
+    width:120px;height:120px;background:var(--bg3);border:1.5px dashed var(--dim);
+    border-radius:10px;display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:0.3rem;font-size:11px;color:var(--dim);
+    font-family:'Space Mono',monospace;
+  }
+  .qr-placeholder img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+  .insta-link{
+    color:var(--pink);font-family:'Space Mono',monospace;font-size:12px;
+    text-decoration:none;border:1px solid rgba(255,77,143,0.3);
+    border-radius:100px;padding:0.4rem 1rem;
+    transition:background 0.2s,border-color 0.2s;
+    display:inline-flex;align-items:center;gap:0.4rem;
+  }
+  .insta-link:hover{background:rgba(255,77,143,0.08);border-color:var(--pink)}
+
+  /* ── LLM Tool Preview Section ── */
+  .tool-preview-section{padding:5rem 2rem}
+  .tool-preview-wrap{max-width:900px;margin:0 auto}
+  .tool-preview-frame{
+    border-radius:20px;overflow:hidden;
+    border:1px solid rgba(123,95,255,0.3);
+    box-shadow:0 0 60px rgba(123,95,255,0.12);
+    background:var(--card);
+  }
+  .tool-preview-frame img{width:100%;display:block}
+  .tool-browser-bar{
+    background:var(--bg3);padding:0.6rem 1rem;
+    display:flex;align-items:center;gap:0.75rem;
+    border-bottom:0.5px solid var(--border);
+  }
+  .browser-dots{display:flex;gap:5px}
+  .browser-dots span{
+    width:10px;height:10px;border-radius:50%;
+  }
+  .browser-dots span:nth-child(1){background:#ff5f56}
+  .browser-dots span:nth-child(2){background:#febc2e}
+  .browser-dots span:nth-child(3){background:#27c93f}
+  .browser-url{
+    flex:1;background:var(--bg2);border:0.5px solid var(--border);
+    border-radius:6px;padding:0.3rem 0.75rem;
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);
+  }
 
   /* Reveal on scroll */
   .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
@@ -346,6 +511,46 @@
   }
   .tl-label{font-size:12px;color:var(--muted);line-height:1.4}
 
+  .qr-wrapper{
+    width: 180px;
+    height: 180px;
+    margin: 24px auto 0;
+    padding: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qr-image{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+
+  .tool-screenshot-area{
+    min-height: 260px;
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+    border-radius: 0 0 24px 24px;
+  }
+
+  .tool-screenshot-img{
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    display: block;
+  }
+
   @media(max-width:700px){
     .timeline{grid-template-columns:1fr 1fr;gap:0.75rem}
     .timeline-step::after{display:none}
@@ -359,13 +564,45 @@
 
 <main>
 <!-- ── HERO ── -->
-<section class="hero" style="position:relative">
-  <p class="hero-eyebrow">Independent Research Project · 2025–26</p>
-  <h1 class="hero-title"><span class="glitch">AlgoLens</span></h1>
+<section class="hero" style="position:relative;padding-bottom:2rem">
+  <p class="hero-eyebrow">Independent Project</p>
+  <h1 class="hero-title"><span class="glitch">Echo-chamber and GreenPill</span></h1>
   <p class="hero-subtitle">An experimental study of social media recommendation algorithms through content and hashtag manipulation</p>
   <p class="hero-tagline">"How does the algorithm decide what you see next?"</p>
 
-  <div class="scroll-hint" style="position:relative;margin-top:3rem">
+  <!-- CTA Buttons -->
+  <div class="hero-ctas" style="opacity:0;animation:fadeUp 0.8s ease 1.0s forwards">
+    <a 
+  href="https://github.com/Aarushi2313/Echo_reset.git"
+  class="btn-primary"
+  id="ext-link"
+  title="Add extension to Chrome"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Install Extension
+</a>
+    
+  </div>
+
+  <!-- Extension Screenshot -->
+  <div class="ext-hero-wrap reveal" style="opacity:0;animation:fadeUp 0.9s ease 1.2s forwards">
+    <div class="ext-hero-frame">
+      <div class="browser-dots" style="padding:0.75rem 1rem 0;display:flex;gap:5px">
+        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f56;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#27c93f;display:inline-block"></span>
+        <span style="flex:1;background:var(--bg2);border:0.5px solid var(--border);border-radius:6px;padding:0.25rem 0.75rem;font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);margin-left:0.5rem">youtube.com</span>
+      </div>
+      <div id="ext-screenshot-area">
+        <img src="extension.png" alt="AlgoLens Chrome Extension on YouTube" style="width:100%;display:block;border-radius:0 0 14px 14px" onerror="this.parentElement.innerHTML='<div class=ext-placeholder><div class=ph-icon>📸</div><div class=ph-label>Extension Screenshot</div><div class=ph-sub>Add your screenshot as Screenshot_2026-05-07_001415.png in the same folder</div></div>'">
+      </div>
+      <div class="ext-hero-badge">Echo_Reset Extension · Live on YouTube</div>
+      <div class="ext-hero-overlay"></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" style="position:relative;margin-top:2.5rem">
     <span>Explore</span>
     <div class="scroll-arrow"></div>
   </div>
@@ -424,7 +661,7 @@
           <span class="flip-card-number">02 / 06</span>
           <span class="flip-card-icon">🎬</span>
           <h2 class="flip-card-title">The Reel Experiments</h2>
-          <p class="flip-card-teaser">23 reels. 4 accounts. Hashtag manipulation, emotional tone, and skip rate analysis across Instagram.</p>
+          <p class="flip-card-teaser">More than 23 reels. Hashtag manipulation, emotional tone, mixed opinion and skip rate analysis across Instagram.</p>
           <span class="flip-card-hint">click to explore →</span>
         </div>
       </div>
@@ -485,22 +722,96 @@
   </div>
 </section>
 
+<!-- ── LLM TOOL PREVIEW ── -->
+<section class="tool-preview-section" id="tool-preview">
+  <p class="section-label reveal">Phase 2 — Web Tool</p>
+  <h2 class="section-title reveal">AlgoLens Research Sandbox</h2>
+  <p class="section-desc reveal">Our LLM-powered website that predicts how a video gets classified, scored, and amplified by algorithms — before you post it.</p>
+
+  <div class="tool-preview-wrap reveal">
+    <div class="tool-preview-frame">
+      <div class="tool-browser-bar">
+        <div class="browser-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="browser-url">algolens-research-sandbox.vercel.app</div>
+      </div>
+      <!-- Replace the src below with your actual website screenshot -->
+      <div id="tool-screenshot-area" class="tool-screenshot-area">
+      <img 
+        src="algolens.png" 
+        alt="AlgoLens Website Screenshot"
+        class="tool-screenshot-img"
+      />
+    </div>
+    </div>
+
+    <!-- <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1.75rem">
+      <a href="#" class="btn-primary" id="tool-link" style="background:var(--purple);box-shadow:0 0 24px rgba(123,95,255,0.35)">
+        🔗 Visit Live Tool
+      </a>
+      
+    </div> -->
+  </div>
+</section>
+
+<!-- ── CONNECT / SOCIAL ── -->
+<section class="social-section" id="connect">
+  <p class="section-label reveal">Find Us</p>
+  <h2 class="section-title reveal">Connect With Us</h2>
+  <p class="section-desc reveal">Follow the project on Instagram or scan the QR code to jump straight to our profile.</p>
+
+  <div class="connect-grid reveal">
+    <!-- Instagram card -->
+    <div class="connect-card instagram">
+      <div class="connect-icon">📸</div>
+      <div class="connect-label">Instagram</div>
+      <div class="connect-title">@_random_loop</div>
+      <div class="connect-sub">Behind-the-scenes, experiment updates, and findings</div>
+      <a href="https://www.instagram.com/_random_loop?igsh=MWo0dHg3NzA0ZW1oYw==" target="_blank" class="insta-link" id="insta-link">
+        ↗ Follow Us
+      </a>
+    </div>
+
+    <!-- QR Code card -->
+    <div class="connect-card">
+    <div class="connect-icon">📲</div>
+    <div class="connect-label">QR Code</div>
+    <div class="connect-title">Scan to Visit</div>
+    <div class="connect-sub">
+      Point your camera at the QR to open our Instagram instantly
+    </div>
+    <div class="qr-wrapper">
+      <img 
+        src="qr.jpeg"
+        alt="Instagram QR Code"
+        class="qr-image"
+      />
+    </div>
+  </div>
+  </div>
+</section>
+
 <!-- ── FOOTER ── -->
 <footer>
-  <span class="footer-logo">AlgoLens</span>
-  <p style="margin-bottom:1.5rem;color:var(--dim);font-size:11px;letter-spacing:0.15em">RESEARCH SANDBOX · 2025–26</p>
+  <span class="footer-logo">Echo-chamber and GreenPill</span>
+  
+  <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-bottom:1.25rem">
+    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Aanya Gupta</span>
+    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Aarushi Verma</span>
+    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Bhuvika Mehta</span>
+    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Janya Gupta</span>
+  </div>
 
-  <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-bottom:1rem">
-    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Member 1</span>
-    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Member 2</span>
-    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Member 3</span>
-    <span style="background:var(--bg3);border:0.5px solid var(--border);border-radius:100px;padding:0.3rem 0.9rem;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text)">Member 4</span>
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-bottom:1.25rem">
+    <a href="#" id="footer-ext-link" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Space Mono',monospace;font-size:11px;color:var(--teal);text-decoration:none;border:0.5px solid rgba(0,229,195,0.25);border-radius:100px;padding:0.3rem 0.85rem;transition:background 0.2s" onmouseover="this.style.background='rgba(0,229,195,0.08)'" onmouseout="this.style.background='transparent'">🧩 Chrome Extension</a>
+    <a href="https://instagram.com/algolens_project" target="_blank" id="footer-insta-link" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'Space Mono',monospace;font-size:11px;color:var(--pink);text-decoration:none;border:0.5px solid rgba(255,77,143,0.25);border-radius:100px;padding:0.3rem 0.85rem;transition:background 0.2s" onmouseover="this.style.background='rgba(255,77,143,0.08)'" onmouseout="this.style.background='transparent'">📸 Instagram</a>
   </div>
 
   <p style="margin-bottom:0.3rem;font-family:'DM Sans',sans-serif;font-size:13px">
-    Under the guidance of <span style="color:var(--purple);font-weight:500">Prof. [Professor Name]</span>
+    Under the guidance of <span style="color:var(--purple);font-weight:500">Prof. Deepak Prince</span>
   </p>
-  <p style="color:var(--dim);font-size:11px;letter-spacing:0.1em">[Department] · [Institute Name]</p>
+  <p style="color:var(--dim);font-size:11px;letter-spacing:0.1em">IIIT Delhi</p>
 </footer>
 </main>
 
@@ -514,7 +825,40 @@
   <h2 class="modal-title">Why We Built This</h2>
   <div class="modal-body">
     <h3>The Core Question</h3>
-    <p>Social media recommendation algorithms silently shape public opinion at scale. We wanted to experimentally study <strong>how</strong> platforms like Instagram, YouTube, and Reddit classify and recommend content — and whether mismatched metadata (hashtags vs. actual content) could manipulate algorithmic reach and formation of echo chambers.</p>
+    <p>
+The primary motivation behind this project was to study how 
+<strong>social media recommendation systems</strong> may contribute to 
+<strong>ideological reinforcement</strong> and 
+<strong>echo chamber formation</strong>.
+
+<br><br>
+
+Modern recommendation systems are highly optimized for 
+<strong>engagement and retention</strong>. As a result, users are often repeatedly exposed to content that aligns with their existing beliefs, interests, or emotional responses. Over time, this can contribute to increasingly polarized information environments, where users become isolated within highly homogeneous ideological spaces, commonly referred to as 
+<strong>echo chambers</strong>.
+
+<br><br>
+
+Our team was particularly interested in understanding:
+
+<br><br>
+
+• how recommendation systems react to 
+<strong>content manipulation</strong>,<br>
+
+• whether metadata such as 
+<strong>hashtags, captions, and audio</strong> influence recommendation behavior,<br>
+
+• and whether recommendation loops can be disrupted through 
+<strong>exposure diversification</strong>.
+
+<br><br>
+
+While many commercial platforms optimize for 
+<strong>engagement-driven personalization</strong>, we were interested in exploring whether alternative recommendation strategies could instead promote 
+<strong>informational diversity</strong> and reduce 
+<strong>ideological isolation</strong>.
+</p>
 
     <h3>Hypothesis</h3>
     <div class="insight-box">
@@ -553,7 +897,7 @@
     <h3>Team Structure</h3>
     <div class="stats-row">
       <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Researchers</div></div>
-      <div class="stat-card"><div class="stat-num">23</div><div class="stat-label">Reels Posted</div></div>
+      <div class="stat-card"><div class="stat-num">23+</div><div class="stat-label">Reels Posted</div></div>
       <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Papers Reviewed</div></div>
     </div>
   </div>
@@ -568,7 +912,7 @@
   <h2 class="modal-title">The Reel Experiments</h2>
   <div class="modal-body">
     <h3>Setup</h3>
-    <p>We created four Instagram accounts — <strong>Clipculture, Randomcore, Dailyloop, Digitaldiary</strong> — and posted 23 short-form reels across diverse genres. Each reel was a controlled experiment varying one or more signals simultaneously.</p>
+    <p>We created one Instagram account — <strong>randomloop</strong> — and posted more than 23 reels across diverse genres. Each reel was a controlled experiment varying one or more signals simultaneously.</p>
 
     <h3>Variables Manipulated</h3>
     <div class="metric-grid">
@@ -600,7 +944,7 @@
       <li><strong>Emotional intensity &gt; metadata relevance</strong> — highest reach was the violent dog attack clip (199 views) despite mismatched hashtags</li>
       <li><strong>Storytelling wins on retention</strong> — Reel 10 had the lowest skip rate (24%) using a narrative format</li>
       <li><strong>Polarized content increases reach</strong> over neutral content — abortion and voting rights reels outperformed neutral social reels</li>
-      <li><strong>Sensitive social issues get suppressed</strong> — feminism and gender reels consistently got very low views</li>
+      <li><strong>Informative and long form reels get suppressed</strong> — informative content and statistical reels consistently got very low views</li>
       <li><strong>Trending audio is supportive but not decisive</strong> — several trending-audio reels still performed poorly</li>
     </ul>
 
@@ -736,12 +1080,12 @@ Audience segments identified:
     <table class="data-table">
       <thead><tr><th>Topic</th><th>Echo Score</th><th>Dominant Opinion</th></tr></thead>
       <tbody>
-        <tr><td>Women shaped by society</td><td class="highlight">0.80–0.90</td><td>Neutral/informational cluster</td></tr>
-        <tr><td>Dog attack / animal rights</td><td class="highlight">0.85</td><td>Off-topic general animal content</td></tr>
-        <tr><td>Women's personal choice</td><td>0.70</td><td>Neutral / generic content</td></tr>
-        <tr><td>Universal suffrage</td><td>0.60</td><td>Debate-oriented / mixed</td></tr>
+        <tr><td>Women shaped by society</td><td class="highlight">0.80–0.90</td><td>Social-conditioning / gender-norm framing cluster</td></tr>
+        <tr><td>Dog attack / animal rights</td><td class="highlight">0.85</td><td>Animal-rights and emotionally reactive safety narratives</td></tr>
+        <tr><td>Women's personal choice</td><td>0.70</td><td>Gender-role and empowerment discourse cluster</td></tr>
+        <tr><td>Universal suffrage</td><td>0.60</td><td>Debate-oriented / mixed election-integrity and voting-restriction framing</td></tr>
         <tr><td>Abortion / pro-life</td><td>0.60</td><td>Mixed debate framing</td></tr>
-        <tr><td>Euthanasia</td><td>0.57</td><td>Anti-euthanasia bias (0 pro-euthanasia)</td></tr>
+        <tr><td>Euthanasia</td><td>0.57</td><td>Mixed opinion and debate oriented</td></tr>
         <tr><td>Denmark / Trump satire</td><td>0.40</td><td>Event-driven clustering</td></tr>
         <tr><td>AI job replacement</td><td>0.50</td><td>Balanced across viewpoints</td></tr>
       </tbody>
@@ -764,26 +1108,32 @@ Audience segments identified:
     <div class="paper-card">
       <div class="paper-title">1. Auditing YouTube's Recommendation Algorithm for Misinformation Filter Bubbles</div>
       <div class="paper-finding">Misinformation-heavy watch history increases density of false content. The "Up Next" sidebar is the primary driver of echo chambers. Correction is slow — debunking content doesn't immediately neutralize biased history.</div>
+      <a href="https://dl.acm.org/doi/10.1145/3485447.3512102" target="_blank" class="paper-link">Read Paper →</a>
     </div>
     <div class="paper-card">
       <div class="paper-title">2. Degenerate Feedback Loops in Recommender Systems</div>
       <div class="paper-finding">Mathematically proves that standard collaborative filtering causes user interests to "shrink" over time. Without intentional exploration, systems are destined to narrow a user's world into a degenerate feedback loop.</div>
+      <a href="https://arxiv.org/abs/1902.10730" target="_blank" class="paper-link">Read Paper →</a>
     </div>
     <div class="paper-card">
       <div class="paper-title">3. Causally Estimating YouTube's Recommender System Using Counterfactual Bots</div>
       <div class="paper-finding">Surprising finding: YouTube's algorithm (post-2019) actually acts as a moderator, pulling users toward mainstream content. Echo chambers on YouTube are primarily driven by user choice, not algorithmic entrapment.</div>
+      <a href="https://www.pnas.org/doi/10.1073/pnas.2313377121" target="_blank" class="paper-link">Read Paper →</a>
     </div>
     <div class="paper-card">
       <div class="paper-title">4. Echo Chambers on Social Media: A Comparative Analysis</div>
       <div class="paper-finding">Measures echo chambers via homophily in user interaction networks + bias in information diffusion. Echo chamber strength ∝ similarity(opinions) × interaction frequency.</div>
+      <a href="https://arxiv.org/abs/2004.09603" target="_blank" class="paper-link">Read Paper →</a>
     </div>
     <div class="paper-card">
       <div class="paper-title">5. The Echo Chamber Effect on Social Media</div>
       <div class="paper-finding">Facebook &amp; Twitter → strong echo chambers. Reddit → weaker. Computed user ideology scores, neighbor leaning, community clustering, and diffusion patterns.</div>
+      <a href="https://www.pnas.org/doi/10.1073/pnas.2023301118" target="_blank" class="paper-link">Read Paper →</a>
     </div>
     <div class="paper-card">
       <div class="paper-title">6. Echo Chambers in Online Social Networks: A Systematic Literature Review</div>
       <div class="paper-finding">Uses Echo Chamber Score (ECS) as a silhouette-like metric in BERT embedding space. ECS ≈ 1 = strong echo chamber; ECS &lt; 0 = mixed opinions.</div>
+      <a href="https://arxiv.org/abs/2202.12032" target="_blank" class="paper-link">Read Paper →</a>
     </div>
 
     <h3>Metrics We Studied &amp; Planned to Implement</h3>
@@ -883,7 +1233,8 @@ neutrality = w1 × normalized_entropy
     <div class="stats-row" style="margin-top:1.25rem">
       <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Core Metrics</div></div>
       <div class="stat-card"><div class="stat-num">2×</div><div class="stat-label">LLM Consistency Check</div></div>
-      <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Clicks (Lazy Mode)</div></div>
+      <div class="stat-card"><div class="stat-num">1
+      </div><div class="stat-label">Click (Lazy Mode)</div></div>
     </div>
   </div>
 </div>
